@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>امتحان شهد 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --ink:#1b2140;
+  --plum:#3a2a5c;
+  --leaf:#7fd1ae;
+  --petal:#ffb3c7;
+  --cream:#fff6ee;
+  --glow:#ffe3a3;
+  --card:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.18);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:linear-gradient(170deg,var(--ink) 0%,var(--plum) 70%,#51345f 100%) fixed;
+  color:var(--cream);
+  font-family:'Readex Pro','Segoe UI',Tahoma,Arial,sans-serif;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+#fireflies{position:fixed;inset:0;pointer-events:none;z-index:0}
+#fireflies span{
+  position:absolute;width:6px;height:6px;border-radius:50%;
+  background:var(--glow);box-shadow:0 0 12px 3px rgba(255,227,163,.55);
+  opacity:0;animation:float var(--d) ease-in-out var(--delay) infinite;
+}
+@keyframes float{
+  0%{opacity:0;transform:translate(0,0)}
+  20%{opacity:.85}
+  50%{transform:translate(var(--dx),-40px)}
+  80%{opacity:.6}
+  100%{opacity:0;transform:translate(calc(var(--dx)*-1),-90px)}
+}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:18px 18px 60px}
+
+/* vine progress */
+.vine{margin:4px 0 18px}
+.vine svg{width:100%;height:auto;display:block;overflow:visible}
+.vine .track{fill:none;stroke:rgba(255,255,255,.14);stroke-width:3;stroke-linecap:round}
+.vine .grow{fill:none;stroke:var(--leaf);stroke-width:3.5;stroke-linecap:round;transition:stroke-dashoffset 1.6s ease}
+.vine .leafp{fill:var(--leaf);transform-box:fill-box;transform-origin:0% 50%;transform:scale(0);transition:transform .9s cubic-bezier(.3,1.5,.5,1)}
+.vine .leafp.on{transform:scale(1)}
+.vine .bloom{transform-box:fill-box;transform-origin:center;transform:scale(0) rotate(-40deg);transition:transform 1.6s cubic-bezier(.3,1.4,.5,1)}
+.vine .bloom.on{transform:scale(1) rotate(0)}
+.count{font-size:.85rem;opacity:.75;text-align:center;margin-top:2px}
+
+/* stage */
+#stage{animation:enter .7s ease both}
+@keyframes enter{from{opacity:0}to{opacity:1}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:24px 20px;backdrop-filter:blur(6px)}
+h1{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:2.6rem;margin:6px 0 8px;line-height:1.5;text-align:center}
+h2{font-weight:600;font-size:1.2rem;line-height:1.9;margin:0 0 18px}
+p{margin:0 0 14px}
+.center{text-align:center}
+.hero-flower{width:110px;height:110px;margin:0 auto 6px;display:block;animation:sway 5s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.btn{
+  display:block;width:100%;margin-top:18px;padding:14px 18px;border:0;border-radius:18px;
+  background:linear-gradient(135deg,var(--petal),#ffd0b8);color:#4a1f3b;
+  font:600 1.05rem 'Readex Pro',sans-serif;cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 8px 24px rgba(255,179,199,.25);
+}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible,.opt:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--glow);outline-offset:3px}
+.btn[disabled]{opacity:.5;cursor:default}
+
+.opt{
+  display:flex;align-items:center;gap:12px;width:100%;margin:0 0 10px;padding:13px 14px;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:18px;
+  color:var(--cream);font:400 1.02rem 'Readex Pro',sans-serif;text-align:right;line-height:1.7;cursor:pointer;
+  transition:background .25s ease,border-color .25s ease,transform .2s ease;
+}
+.opt:hover:not([disabled]){background:rgba(255,255,255,.13)}
+.opt .l{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);font-weight:600;font-size:.9rem}
+.opt.right{border-color:var(--leaf);background:rgba(127,209,174,.2)}
+.opt.right .l{background:var(--leaf);color:#12332a}
+.opt.wrong{border-color:var(--petal);background:rgba(255,179,199,.14)}
+.opt.wrong .l{background:var(--petal);color:#4a1f3b}
+.opt.dim{opacity:.5}
+.opt[disabled]{cursor:default}
+
+.fb{margin:12px 0 0;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.06);font-size:.95rem;animation:enter .5s ease both}
+
+.love{
+  position:relative;margin-top:18px;padding:22px 18px 20px;border-radius:24px;text-align:center;
+  background:linear-gradient(160deg,rgba(255,179,199,.22),rgba(255,227,163,.12));
+  border:1px solid rgba(255,179,199,.45);
+  animation:unfold .9s cubic-bezier(.2,.9,.3,1) both;transform-origin:top center;
+}
+@keyframes unfold{from{opacity:0;transform:scaleY(.4) translateY(-10px)}to{opacity:1;transform:none}}
+.love .msg{font-family:'Aref Ruqaa',serif;font-size:1.45rem;line-height:2.1;margin:0}
+.love .heart{display:inline-block;animation:beat 1.8s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.rise{position:absolute;bottom:50%;font-size:1.1rem;pointer-events:none;animation:rise 2s ease-out forwards}
+@keyframes rise{from{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}to{opacity:0;transform:translateY(-110px) scale(1.2)}}
+
+textarea{
+  width:100%;min-height:150px;padding:14px;border-radius:18px;border:1px solid var(--line);
+  background:rgba(255,255,255,.07);color:var(--cream);font:400 1rem 'Readex Pro',sans-serif;line-height:1.9;resize:vertical;
+}
+textarea::placeholder{color:rgba(255,246,238,.5)}
+details{margin-top:14px;border:1px solid var(--line);border-radius:16px;padding:10px 14px;background:rgba(255,255,255,.05)}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;font-size:.97rem}
+
+.score{font-family:'Aref Ruqaa',serif;font-size:3.2rem;text-align:center;color:var(--glow);margin:0;line-height:1.4}
+.letter{font-family:'Aref Ruqaa',serif;font-size:1.35rem;line-height:2.2;text-align:center}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  #fireflies{display:none}
+}
+</style>
+</head>
+<body>
+<div id="fireflies" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="vine" aria-hidden="true">
+    <svg viewBox="0 0 400 70" id="vineSvg">
+      <path id="track" class="track" d="M10 44 C 50 8, 90 78, 130 44 S 210 8, 250 44 S 330 78, 372 40"/>
+      <path id="grow" class="grow" d="M10 44 C 50 8, 90 78, 130 44 S 210 8, 250 44 S 330 78, 372 40"/>
+      <g id="leaves"></g>
+      <g id="bloom" class="bloom" transform="translate(380,36)"></g>
+    </svg>
+    <div class="count" id="count"></div>
+  </div>
+  <main id="stage"></main>
+</div>
+
+<script>
+/* ---------- المحتوى ---------- */
+const MCQ = [
+  { q:"المادة المسئولة عن إكساب الأنسجة الوعائية التوصيلية الصلابة والقوة هي ........",
+    o:["السليلوز","السيوبرين","اللجنين","الكيوتين"], a:2,
+    why:"اللجنين بيترسب في جدر الأنسجة الوعائية فيدّيها الصلابة والقوة.",
+    love:"اللجنين هو اللي بيدّي النبات قوته… وأنتي اللي بتدّيني قوتي كل يوم يا شهد 🌿" },
+  { q:"ما سبب عدم انتقال الماء إلى داخل الخلايا الإسكلرنشيمية بالخاصية الأسموزية؟",
+    o:["وجود الكيوتين","غياب البروتوبلازم","وجود السليلوز","وجود اللجنين"], a:1,
+    why:"الخلايا الإسكلرنشيمية خلايا ميتة مفيهاش بروتوبلازم، فمفيش غشاء حي يتم عليه الانتشار الأسموزي.",
+    love:"الخلية دي بتضحّي بحياتها علشان تسند النبات… وأنا مستعد أسندك أنتي طول عمري 💛" },
+  { q:"النسبة بين مساحة طبقة الكيوتين على السطح العلوي للبشرة إلى مساحتها على السطح السفلي لها",
+    o:["أكبر من الواحد الصحيح","أقل من الواحد الصحيح","تساوي واحد صحيح","تختلف النسبة باختلاف وقت قياس مساحة طبقة الكيوتين بكل من البشرتين على مدار اليوم"], a:0,
+    why:"طبقة الكيوتين أسمك على السطح العلوي المعرّض للشمس، فالنسبة أكبر من الواحد.",
+    love:"الكيوتين بيحمي الورقة من الشمس… وأنا هحميكي من أي حاجة تزعلك 🌤️" },
+  { q:"أي المواد التالية تعمل على زيادة قوة جدر الخلايا النباتية؟",
+    o:["الكيوتين فقط","السليلوز فقط","السيوبرين فقط","السليلوز واللجنين"], a:3,
+    why:"السليلوز واللجنين هما اللي بيقوّوا جدار الخلية النباتية.",
+    love:"جدار الخلية بيقوى بالسليلوز واللجنين… وحبنا بيقوى كل يوم بيكِ أنتي 💞" },
+  { q:"أي البوليمرات التالية يتواجد في النسيج الوعائي للنبات ويوفر له المزيد من الدعامة التركيبية؟",
+    o:["اللجنين","الكيوتين","السليلوز","السيوبرين"], a:0,
+    why:"اللجنين بوليمر بيتواجد في النسيج الوعائي ويدّيه دعامة أكتر.",
+    love:"في ملايين النباتات في الدنيا، ولا واحدة فيهم تحلّى من ضحكتك 🌸" },
+  { q:"أي البدائل التالية لا يتفق مع بقية البدائل بالنسبة لحدوث الدعامة التركيبية في النبات؟",
+    o:["السليلوز","الكيتين","اللجنين","السيوبرين"], a:1,
+    why:"الكيتين مش من مكونات النبات، هو بيتواجد في جدر خلايا الفطريات وهيكل الحشرات. أما الباقي فمواد نباتية.",
+    love:"كل البدائل شبه بعض وفي واحد مختلف… وأنتي برضو مختلفة عن كل الناس، بالحلو طبعًا ✨" },
+  { q:"أي المواد التالية وجودها في جدر خلايا النبات يزيد من مرونتها وصلابتها ولكن لا يمنع نفاذ الماء؟",
+    o:["السيوبرين","الكيوتين","السليلوز","اللجنين"], a:2,
+    why:"السليلوز بيدّي مرونة وقوة، وفي نفس الوقت منفذ للماء، عكس باقي المواد.",
+    love:"مرنة وقوية في نفس الوقت… زيك بالظبط يا شهد 🤍" },
+  { q:"تحافظ ثمار البرقوق على محتواها من الماء لاحتواء الطبقة الخارجية لها على مادة ........",
+    o:["السيوبرين","الكيوتين","السليلوز","اللجنين"], a:1,
+    why:"الكيوتين مادة شمعية غير منفذة للماء بتغطي السطح الخارجي وبتقلل فقد الماء.",
+    love:"زي ما الكيوتين بيحافظ على الماء جوه الثمرة… أنا قلبي محفوظ عندك 💗" }
+];
+
+const ESSAY = [
+  { q:"وضّحي دور كل من السليلوز واللجنين في الدعامة التركيبية للنبات.",
+    model:"السليلوز: بيكوّن الجدار الخلوي ويدّي الخلية مرونة وقوة، وهو منفذ للماء. اللجنين: بيترسب في جدر الأنسجة الوعائية والإسكلرنشيمية فيدّيها الصلابة والقوة، وبيمنع نفاذ الماء.",
+    love:"لو أسأل نفسي مين دعامتي في الدنيا دي… الإجابة سهلة، شهد 🌿" },
+  { q:"علّلي: يغطي الكيوتين السطح الخارجي للبشرة في الأوراق والثمار.",
+    model:"لأن الكيوتين مادة شمعية غير منفذة للماء، فبيقلل فقد الماء من السطح وبيحمي الأنسجة الداخلية من الجفاف.",
+    love:"آخر سؤال… وأنا مش عايزه يخلص، لأن كل مرة بشوفك فيها بتبقى أحلى لحظة في يومي 🌙" }
+];
+
+const TOTAL = MCQ.length + ESSAY.length;
+const LETTERS = ["أ","ب","ج","د"];
+const stage = document.getElementById('stage');
+let step = -1, score = 0;
+
+/* ---------- الخلفية: يراعات هادية ---------- */
+(function(){
+  const box = document.getElementById('fireflies');
+  for(let i=0;i<16;i++){
+    const s = document.createElement('span');
+    s.style.left = (Math.random()*100)+'%';
+    s.style.top = (30+Math.random()*70)+'%';
+    s.style.setProperty('--d',(7+Math.random()*7)+'s');
+    s.style.setProperty('--delay',(-Math.random()*10)+'s');
+    s.style.setProperty('--dx',(Math.random()*60-30)+'px');
+    box.appendChild(s);
+  }
+})();
+
+/* ---------- نبتة التقدم ---------- */
+const grow = document.getElementById('grow');
+const leavesG = document.getElementById('leaves');
+const bloom = document.getElementById('bloom');
+const L = grow.getTotalLength();
+grow.style.strokeDasharray = L;
+grow.style.strokeDashoffset = L;
+const leafEls = [];
+for(let i=1;i<=TOTAL;i++){
+  const f = (i/TOTAL)*0.94;
+  const p = grow.getPointAtLength(L*f);
+  const up = i%2===0;
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('transform',`translate(${p.x},${p.y}) rotate(${up?-55:55})`);
+  const leaf = document.createElementNS('http://www.w3.org/2000/svg','path');
+  leaf.setAttribute('d','M0 0 C 5 -9, 15 -9, 19 0 C 15 9, 5 9, 0 0Z');
+  leaf.setAttribute('class','leafp');
+  g.appendChild(leaf); leavesG.appendChild(g); leafEls.push(leaf);
+}
+(function(){
+  const ns='http://www.w3.org/2000/svg';
+  for(let k=0;k<6;k++){
+    const c=document.createElementNS(ns,'ellipse');
+    c.setAttribute('cx',0);c.setAttribute('cy',-9);c.setAttribute('rx',5.5);c.setAttribute('ry',9);
+    c.setAttribute('fill','#ffb3c7');c.setAttribute('transform',`rotate(${k*60})`);
+    bloom.appendChild(c);
+  }
+  const m=document.createElementNS(ns,'circle');
+  m.setAttribute('r',5);m.setAttribute('fill','#ffe3a3');bloom.appendChild(m);
+})();
+function updateVine(done){
+  grow.style.strokeDashoffset = L*(1-done/TOTAL*0.97);
+  leafEls.forEach((l,i)=>l.classList.toggle('on',i<done));
+  bloom.classList.toggle('on',done>=TOTAL);
+  document.getElementById('count').textContent = done<TOTAL ? `السؤال ${Math.min(done+1,TOTAL)} من ${TOTAL}` : 'خلّصتي كل الأسئلة 🌸';
+}
+
+/* ---------- أدوات ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function render(html){
+  stage.style.animation='none'; void stage.offsetWidth; stage.style.animation='';
+  stage.innerHTML = html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function burst(host){
+  const hs=['💗','💖','🌸','✨','💕','🌷'];
+  for(let i=0;i<7;i++){
+    const h=document.createElement('span');
+    h.className='rise'; h.textContent=hs[i%hs.length];
+    h.style.left=(10+Math.random()*80)+'%';
+    h.style.animationDelay=(i*0.15)+'s';
+    host.appendChild(h);
+    setTimeout(()=>h.remove(),2800);
+  }
+}
+function showLove(text,nextLabel,onNext,host){
+  const box=document.createElement('div');
+  box.className='love';
+  box.innerHTML=`<p class="msg">${esc(text)}</p>`;
+  const b=document.createElement('button');
+  b.className='btn'; b.textContent=nextLabel; b.onclick=onNext;
+  host.appendChild(box); host.appendChild(b);
+  burst(box);
+  setTimeout(()=>b.scrollIntoView({behavior:'smooth',block:'center'}),350);
+}
+
+/* ---------- الشاشات ---------- */
+function intro(){
+  updateVine(0);
+  render(`
+    <div class="card">
+      <svg class="hero-flower" viewBox="-60 -60 120 120" aria-hidden="true">
+        ${[0,1,2,3,4,5,6,7].map(k=>`<ellipse cx="0" cy="-26" rx="13" ry="26" fill="#ffb3c7" opacity=".92" transform="rotate(${k*45})"/>`).join('')}
+        <circle r="13" fill="#ffe3a3"/>
+      </svg>
+      <h1>أهلًا يا شهد</h1>
+      <p class="center">ده امتحان أحياء مخصوص ليكي، عن «الدعامة في النبات».<br>
+      ٨ أسئلة اختيار من متعدد، وسؤالين مقال.<br>
+      وبعد كل سؤال… في حاجة صغيرة مستنياكي 💌</p>
+      <p class="center" style="opacity:.8;font-size:.95rem">خدي وقتك، ومفيش حاجة اسمها غلط هنا، في بس أسئلة بنتعلم منها.</p>
+      <button class="btn" id="go">يلا نبدأ</button>
+    </div>`);
+  document.getElementById('go').onclick=()=>{step=0;next();};
+}
+
+function next(){
+  if(step<MCQ.length) return mcq(step);
+  if(step<TOTAL) return essay(step-MCQ.length);
+  return finale();
+}
+
+function mcq(i){
+  const d=MCQ[i];
+  updateVine(i);
+  render(`
+    <div class="card">
+      <h2>${i+1}) ${esc(d.q)}</h2>
+      <div id="opts">
+        ${d.o.map((t,k)=>`<button class="opt" data-k="${k}"><span class="l">${LETTERS[k]}</span><span>${esc(t)}</span></button>`).join('')}
+      </div>
+      <div id="after"></div>
+    </div>`);
+  stage.querySelectorAll('.opt').forEach(btn=>{
+    btn.onclick=()=>{
+      const k=+btn.dataset.k, ok=k===d.a;
+      if(ok) score++;
+      stage.querySelectorAll('.opt').forEach(b=>{
+        b.disabled=true;
+        const bk=+b.dataset.k;
+        if(bk===d.a) b.classList.add('right');
+        else if(bk===k) b.classList.add('wrong');
+        else b.classList.add('dim');
+      });
+      const after=document.getElementById('after');
+      const fb=document.createElement('div');
+      fb.className='fb';
+      fb.innerHTML=(ok?'برافو عليكي يا شهد 🌟 ':'مش مشكلة يا قمر 🌷 الإجابة الصح هي «'+esc(d.o[d.a])+'». ')+esc(d.why);
+      after.appendChild(fb);
+      setTimeout(()=>{
+        showLove(d.love,'كمّلي',()=>{step++;updateVine(step);next();},after);
+        updateVine(i+1);
+      },900);
+    };
+  });
+}
+
+function essay(i){
+  const d=ESSAY[i], n=MCQ.length+i+1;
+  updateVine(MCQ.length+i);
+  render(`
+    <div class="card">
+      <h2>${n}) سؤال مقالي: ${esc(d.q)}</h2>
+      <textarea id="ans" placeholder="اكتبي إجابتك هنا بهدوء…" aria-label="إجابتك"></textarea>
+      <div id="after"><button class="btn" id="send">تمام، خلّصت</button></div>
+    </div>`);
+  document.getElementById('send').onclick=function(){
+    this.remove();
+    document.getElementById('ans').readOnly=true;
+    const after=document.getElementById('after');
+    const det=document.createElement('details');
+    det.innerHTML=`<summary>شوفي الإجابة النموذجية</summary><p>${esc(d.model)}</p>`;
+    after.appendChild(det);
+    setTimeout(()=>{
+      showLove(d.love,i===ESSAY.length-1?'شوفي النتيجة':'كمّلي',()=>{step++;updateVine(step);next();},after);
+      updateVine(MCQ.length+i+1);
+    },500);
+  };
+}
+
+function finale(){
+  updateVine(TOTAL);
+  const m = score===MCQ.length ? 'كل الإجابات صح! دكتورة المستقبل 💐'
+          : score>=MCQ.length-2 ? 'مستواكي جامد جدًا يا شهد، فخور بيكي 🌸'
+          : 'بدايتك حلوة، وكل مرة هتبقي أحسن وأحسن 🌷';
+  render(`
+    <div class="card" id="fin">
+      <p class="center" style="margin-bottom:0">نتيجتك في الاختيار من متعدد</p>
+      <p class="score">${score} من ${MCQ.length}</p>
+      <p class="center">${m}</p>
+      <div class="love">
+        <p class="letter">يا شهد…<br>
+        النبات محتاج دعامة علشان يفضل واقف،<br>
+        وأنا محتاج وجودك علشان أفضل قوي.<br>
+        شكرًا إنك في حياتي، وبحبك أكتر مما يتقال في أي امتحان <span class="heart">💗</span></p>
+      </div>
+      <button class="btn" id="again">نعمل الامتحان تاني؟</button>
+    </div>`);
+  const love=stage.querySelector('.love');
+  burst(love); setTimeout(()=>burst(love),1200); setTimeout(()=>burst(love),2400);
+  document.getElementById('again').onclick=()=>{step=-1;score=0;intro();};
+}
+
+intro();
+</script>
+</body>
+</html>
